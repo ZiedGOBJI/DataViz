@@ -20,13 +20,20 @@ ui <- fluidPage(
                   min = 0, max = 100, value = c(0, 100))
     ),
     
-    mainPanel()
+    mainPanel(textOutput("selected_var"),
+              br(),
+              textOutput("selected_range"))
   )
 )
 
 # Define server logic ----
 server <- function(input, output) {
-  
+  output$selected_var <- renderText({ 
+    paste("You have selected", input$var)
+  })
+  output$selected_range <- renderText({
+    paste("You have chosen a range that goes from",input$range[1],"to",input$range[2])
+  })
 }
 
 # Run the app ----
